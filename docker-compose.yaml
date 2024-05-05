@@ -31,7 +31,7 @@ services:
       dockerfile: Dockerfile.1
     ports:
       - "8083:8080"
-    restart: always
+    restart: always 
 
    
   channel:

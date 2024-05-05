@@ -1,0 +1,294 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Swagger Example"
+  },
+  "host": "localhost",
+  "basePath": "/api/",
+  "tags": [
+    {
+      "name": "channel"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/v1/channel": {
+      "post": {
+        "tags": [
+          "channel"
+        ],
+        "summary": "Создание нового канала",
+        "operationId": "createChannel",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Запрос на создание канала",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateChannelRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Канал успешно создан",
+            "schema": {
+              "$ref": "#/definitions/CreateChannelResponse"
+            }
+          },
+          "400": {
+            "description": "Некорректный запрос",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "409": {
+            "description": "Канал уже существует",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        }
+      }
+    },
+    "/v1/channel/{id}": {
+      "get": {
+        "tags": [
+          "channel"
+        ],
+        "summary": "Получение информации о канале",
+        "operationId": "getChannel",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID канала",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Информация о канале успешно получена",
+            "schema": {
+              "$ref": "#/definitions/GetChannelResponse"
+            }
+          },
+          "404": {
+            "description": "Канал не найден",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "channel"
+        ],
+        "summary": "Обновление информации о канале",
+        "operationId": "updateChannel",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID канала",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Запрос на обновление информации о канале",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateChannelRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Информация о канале успешно обновлена",
+            "schema": {
+              "$ref": "#/definitions/UpdateChannelResponse"
+            }
+          },
+          "204": {
+            "description": "Нет содержимого",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "403": {
+            "description": "Запрещено",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "channel"
+        ],
+        "summary": "Удаление канала",
+        "operationId": "deleteChannel",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID канала",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Канал успешно удален",
+            "schema": {
+              "$ref": "#/definitions/DeleteChannelResponse"
+            }
+          },
+          "204": {
+            "description": "Нет содержимого",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "403": {
+            "description": "Запрещено",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorMessage": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "CreateChannelRequest": {
+      "type": "object",
+      "required": [
+        "text"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "example": "Channel 1"
+        }
+      }
+    },
+    "CreateChannelResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        }
+      }
+    },
+    "GetChannelResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 1
+        },
+        "text": {
+          "type": "string",
+          "example": "Channel 1"
+        }
+      }
+    },
+    "UpdateChannelRequest": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "example": "Updated Channel 1"
+        }
+      }
+    },
+    "UpdateChannelResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 1
+        },
+        "text": {
+          "type": "string",
+          "example": "Updated Channel 1"
+        }
+      }
+    },
+    "DeleteChannelResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 1
+        }
+      }
+    }
+  }
+}
