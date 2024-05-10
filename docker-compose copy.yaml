@@ -1,0 +1,90 @@
+version: '3.8'
+
+services:
+  gateway-dekstop:
+    build:
+      context: ./services/gateway-dekstop
+      dockerfile: Dockerfile.1
+    ports:
+      - "8080:8080"
+    restart: always
+  
+  gateway-mobile:
+    build:
+      context: ./services/gateway-mobile
+      dockerfile: Dockerfile.1
+    ports:
+      - "8081:8080"
+    restart: always
+  
+  gateway-server:
+    build:
+      context: ./services/gateway-server
+      dockerfile: Dockerfile.1
+    ports:
+      - "8082:8080"
+    restart: always
+  
+  auth:
+    build:
+      context: ./services/auth
+      dockerfile: Dockerfile.1
+    ports:
+      - "8083:8080"
+    restart: always 
+
+   
+  channel:
+    build:
+      context: ./services/channel
+      dockerfile: Dockerfile.1
+    ports:
+      - "8084:8080"
+    restart: always    
+       
+  friend:
+    build:
+      context: ./services/friend
+      dockerfile: Dockerfile.1
+    ports:
+      - "8085:8080"
+    restart: always   
+
+  message:
+    build:
+      context: ./services/message
+      dockerfile: Dockerfile.1
+    ports:
+      - "8086:8080"
+    restart: always  
+
+  post:
+    build:
+      context: ./services/post
+      dockerfile: Dockerfile.1
+    ports:
+      - "8087:8080"
+    restart: always  
+
+  profil:
+    build:
+      context: ./services/profil
+      dockerfile: Dockerfile.1
+    ports:
+      - "8088:8080"
+    restart: always  
+    
+  server:
+    build:
+      context: ./services/server
+      dockerfile: Dockerfile.1
+    ports:
+      - "8089:8080"
+    restart: always 
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    restart: always
